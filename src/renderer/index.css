@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ui-scale: 1.0;
+    --density-factor: 1.0;
+
+    --bg-base: #0a0d14;
+    --bg-subtle: #0e131f;
+    --bg-card: #121827;
+    --bg-card-hover: #161e31;
+    --bg-card-elevated: #1a2238;
+    
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --border-default: rgba(255, 255, 255, 0.12);
+    --border-accent: rgba(99, 102, 241, 0.35);
+    
+    --color-brand: #6366f1;
+    --color-brand-hover: #4f46e5;
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    
+    --shadow-subtle: 0 2px 10px -2px rgba(0, 0, 0, 0.35);
+    --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+    --shadow-card-hover: 0 8px 30px -4px rgba(0, 0, 0, 0.65);
+    --shadow-modal: 0 25px 60px -15px rgba(0, 0, 0, 0.85);
+
+    /* Centralized Typography Tokens derived from --ui-scale */
+    --font-page-title: clamp(22px, calc(28px * var(--ui-scale)), 34px);
+    --font-section-title: clamp(16px, calc(19px * var(--ui-scale)), 23px);
+    --font-card-title: clamp(14px, calc(16px * var(--ui-scale)), 20px);
+    --font-body: clamp(12px, calc(13.5px * var(--ui-scale)), 16px);
+    --font-small: clamp(11px, calc(12px * var(--ui-scale)), 14px);
+    --font-meta: clamp(10px, calc(11px * var(--ui-scale)), 13px);
+
+    /* Centralized Spacing & Component Sizing Tokens */
+    --space-1: calc(4px * var(--ui-scale) * var(--density-factor));
+    --space-2: calc(8px * var(--ui-scale) * var(--density-factor));
+    --space-3: calc(12px * var(--ui-scale) * var(--density-factor));
+    --space-4: calc(16px * var(--ui-scale) * var(--density-factor));
+    --space-5: calc(20px * var(--ui-scale) * var(--density-factor));
+    --space-6: calc(24px * var(--ui-scale) * var(--density-factor));
+    --space-8: calc(32px * var(--ui-scale) * var(--density-factor));
+
+    --card-padding: clamp(14px, calc(18px * var(--ui-scale) * var(--density-factor)), 24px);
+    --sidebar-width: clamp(210px, calc(240px * var(--ui-scale)), 270px);
+    --header-height: clamp(56px, calc(64px * var(--ui-scale)), 72px);
+    --button-height-sm: clamp(30px, calc(34px * var(--ui-scale)), 40px);
+    --button-height-md: clamp(34px, calc(38px * var(--ui-scale)), 44px);
+    --button-height-lg: clamp(38px, calc(44px * var(--ui-scale)), 50px);
+    --card-min-width: clamp(310px, calc(340px * var(--ui-scale)), 400px);
+  }
+
+  body {
+    @apply bg-[#0a0d14] text-slate-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200;
+    font-size: var(--font-body);
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.05) 0px, transparent 45%),
+      radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.03) 0px, transparent 45%),
+      radial-gradient(at 50% 30%, rgba(15, 23, 42, 0.3) 0px, transparent 100%);
+    background-attachment: fixed;
+    transition: font-size 150ms ease-out;
+  }
+}
+
+/* Custom premium scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 13, 20, 0.7);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.35);
+}
+
+/* Standardized SaaS Card Surfaces */
+.saas-card {
+  background-color: #121827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.saas-card-hover:hover {
+  background-color: #161e31;
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+}
+
+.saas-subcard {
+  background-color: rgba(10, 13, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+
+.saas-panel {
+  background-color: rgba(18, 24, 39, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.saas-modal {
+  background-color: rgba(14, 19, 31, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-modal);
+}
+
+/* Accessible focus ring */
+.saas-focus:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* Backward compatibility for glass-panel while using new tokens */
+.glass-panel {
+  background-color: #121827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-card);
+}
+
+.glass-panel-hover {
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background-color: #161e31;
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+}
+
+/* Electron App Region Drag */
+.app-drag {
+  -webkit-app-region: drag;
+}
+
+.app-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* Responsive Adaptive Grids using Central Design Tokens */
+.responsive-account-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--card-min-width)), 1fr));
+  gap: var(--space-4);
+}
+
+.responsive-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: var(--space-4);
+}
+
+/* Fixed Tooltip Typography Protection (12px fixed) */
+.fixed-tooltip {
+  font-size: 12px !important;
+  line-height: 16px !important;
+}
+
+/* UI Scale Toast Notification Animation */
+@keyframes scaleToastIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+.animate-scale-toast {
+  animation: scaleToastIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+

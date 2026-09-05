@@ -1,0 +1,12 @@
+node_modules/
+dist/
+app-data/
+.env
+.env.*
+!.env.example
+
+# Local tooling and OS files
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini

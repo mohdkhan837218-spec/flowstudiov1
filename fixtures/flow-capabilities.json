@@ -1,0 +1,36 @@
+{
+  "generationTypes": ["VIDEO", "IMAGE"],
+  "inputModes": ["NONE", "FRAMES", "INGREDIENTS"],
+  "aspectRatios": ["9:16", "16:9"],
+  "video": {
+    "models": [
+      { "id": "omni-flash", "label": "Omni Flash", "type": "VIDEO", "available": true },
+      { "id": "veo-3-1-lite", "label": "Veo 3.1 - Lite", "type": "VIDEO", "available": true },
+      { "id": "veo-3-1-fast", "label": "Veo 3.1 - Fast", "type": "VIDEO", "available": true },
+      { "id": "veo-3-1-quality", "label": "Veo 3.1 - Quality", "type": "VIDEO", "available": true }
+    ],
+    "durations": [
+      { "value": 4, "label": "4s", "available": true },
+      { "value": 6, "label": "6s", "available": true },
+      { "value": 8, "label": "8s", "available": true },
+      { "value": 10, "label": "10s", "available": true }
+    ]
+  },
+  "image": {
+    "models": [
+      { "id": "imagen-3", "label": "Imagen 3", "type": "IMAGE", "available": true },
+      { "id": "omni-flash", "label": "Omni Flash", "type": "IMAGE", "available": true }
+    ],
+    "aspectRatios": [
+      { "value": "9:16", "label": "9:16", "available": true },
+      { "value": "16:9", "label": "16:9", "available": true }
+    ]
+  },
+  "generationCounts": [1, 2, 3, 4],
+  "downloadQualities": [
+    { "id": "720p", "label": "720p — Original Size", "available": true },
+    { "id": "1080p", "label": "1080p — Upscaled", "available": true },
+    { "id": "4k", "label": "4K — Upscaled", "available": true },
+    { "id": "270p_gif", "label": "270p — Animated GIF", "available": true }
+  ]
+}
