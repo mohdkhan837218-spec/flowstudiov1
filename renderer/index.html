@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Flow Multi-Account Studio</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-layout">
+    
+    <!-- 📱 LEFT SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h2>Flow Studio</h2>
+          <span class="brand-version">Multi-Account AI</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <button class="nav-item active" id="tabBtnStudio" data-target="viewStudio">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>Studio & Queue</span>
+        </button>
+
+        <button class="nav-item" id="tabBtnGallery" data-target="viewGallery">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+          </svg>
+          <span>Video Gallery</span>
+          <span class="nav-badge" id="navGalleryBadge">0</span>
+        </button>
+
+        <button class="nav-item" id="tabBtnImageGallery" data-target="viewImageGallery">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span>Image Gallery</span>
+          <span class="nav-badge" id="navImageGalleryBadge">0</span>
+        </button>
+
+        <button class="nav-item" id="tabBtnHistory" data-target="viewHistory">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>Generation History</span>
+          <span class="nav-badge" id="navHistoryBadge">0</span>
+        </button>
+
+        <button class="nav-item" id="tabBtnLogs" data-target="viewLogs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="4 17 10 11 4 5"></polyline>
+            <line x1="12" y1="19" x2="20" y2="19"></line>
+          </svg>
+          <span>Activity Logs</span>
+        </button>
+      </nav>
+
+      <!-- ⚙️ BOTTOM LEFT CORNER SETTINGS BUTTON -->
+      <div class="sidebar-footer">
+        <button class="nav-item settings-trigger-btn" id="btnOpenSettings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span>Settings & Accounts</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 🖥️ MAIN CONTENT AREA -->
+    <main class="main-content">
+      
+      <!-- Top Status Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <h1 id="pageTitle">Studio & Queue</h1>
+          <span class="active-profile-tag" id="activeProfileIndicator">No Profile Active</span>
+        </div>
+        <div class="header-right" style="display: flex; align-items: center; gap: 12px;">
+          <!-- ⚡ Live Total Pool Credits Badge -->
+          <div class="credits-pool-badge" id="headerCreditsPoolBadge" title="Live total remaining video credits across all active Google accounts" style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.35); padding: 6px 14px; border-radius: 20px; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #c084fc; cursor: pointer;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <span id="headerTotalCreditsText">-- Credits</span>
+            <button class="btn-icon" id="btnHeaderRefreshCredits" title="Refresh Live Credits from Google Flow" style="width: 20px; height: 20px; padding: 0; background: transparent; border: none; color: #c084fc; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            </button>
+          </div>
+
+          <div class="status-indicator" id="globalStatusBadge">
+            <span class="status-dot"></span>
+            <span id="globalStatusText">Ready</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- VIEW 1: STUDIO & QUEUE -->
+      <section class="view-panel active" id="viewStudio">
+        <div class="studio-grid">
+          
+          <!-- Prompt Input & Studio Section -->
+          <div class="panel-card prompts-card">
+            <div class="card-header">
+              <div class="header-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                <h3>Batch Prompts & Studio</h3>
+              </div>
+              <span class="badge" id="promptCountBadge">0 Prompts</span>
+            </div>
+
+            <!-- Mode Switcher (Video vs Image) -->
+            <div class="mode-switcher-bar">
+              <div class="mode-toggle-group">
+                <button class="mode-toggle-btn active" id="btnModeVideo">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                  Video Generation
+                </button>
+                <button class="mode-toggle-btn" id="btnModeImage">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                  Image Generation
+                </button>
+              </div>
+
+              <!-- Sub-modes for Video (Text vs Ingredients vs Frames) -->
+              <div class="submode-toggle-group" id="videoSubmodeGroup">
+                <button class="submode-btn active" id="btnSubmodeText">Text-to-Video</button>
+                <button class="submode-btn" id="btnSubmodeIngredients">🧪 Ingredients (Ref Image)</button>
+                <button class="submode-btn" id="btnSubmodeFrames">🎞️ Frames (Start ➔ End)</button>
+              </div>
+            </div>
+
+            <!-- Reference Image Attachment Box (For Ingredients Mode with Multi-Image Support) -->
+            <div class="attachment-box" id="ingredientsAttachmentBox" style="display: none;">
+              <div class="attachment-header">
+                <label>Reference Images (Ingredients):</label>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-sm btn-outline" id="btnPickRefImage">+ Single Image</button>
+                  <button class="btn btn-sm btn-primary" id="btnPickMultiRefImages" style="font-size: 11px;">📁+ Batch Multi-Images</button>
+                  <button class="btn btn-sm btn-danger" id="btnClearAllRefImages" style="display: none; font-size: 11px;">Clear All</button>
+                </div>
+              </div>
+              
+              <!-- Multi-Image List Grid -->
+              <div class="multi-ref-grid" id="multiRefImagesGrid" style="display: none; margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
+                <!-- Dynamically populated with image preview chips -->
+              </div>
+
+              <!-- Auto-Pairing Banner -->
+              <div id="refAutoPairingBanner" style="display: none; margin-top: 8px; font-size: 11px; color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.2);">
+                ⚡ <strong>1-to-1 Pairing Active:</strong> Each prompt line will automatically receive its corresponding numbered reference image!
+              </div>
+
+              <div class="attachment-preview-area" id="refImagePreviewArea" style="display: none;">
+                <img id="refImageThumbnail" src="" alt="Reference Image">
+                <div class="attachment-file-info">
+                  <span id="refImageFileName">image.png</span>
+                  <button class="btn-icon btn-remove-attachment" id="btnRemoveRefImage" title="Remove image">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Frames Attachment Box (For Frames Mode: Start & End) -->
+            <div class="attachment-box" id="framesAttachmentBox" style="display: none;">
+              <div class="frames-grid">
+                <div class="frame-slot">
+                  <div class="frame-slot-header">
+                    <span>1. Start Frame (First)</span>
+                    <button class="btn btn-sm btn-outline" id="btnPickStartFrame">+ Select</button>
+                  </div>
+                  <div class="frame-slot-preview" id="startFramePreviewArea">
+                    <span class="slot-empty-text">No Start Image</span>
+                    <img id="startFrameThumbnail" src="" style="display: none;">
+                  </div>
+                </div>
+
+                <div class="frame-slot-arrow">➔</div>
+
+                <div class="frame-slot">
+                  <div class="frame-slot-header">
+                    <span>2. End Frame (Last)</span>
+                    <button class="btn btn-sm btn-outline" id="btnPickEndFrame">+ Select</button>
+                  </div>
+                  <div class="frame-slot-preview" id="endFramePreviewArea">
+                    <span class="slot-empty-text">No End Image</span>
+                    <img id="endFrameThumbnail" src="" style="display: none;">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <textarea id="promptInput" placeholder="First long prompt.&#10;It can span multiple lines.&#10;&#10;Second prompt starts after a blank line.&#10;&#10;Third prompt."></textarea>
+            
+            <!-- Interactive Quick Controls Bar (3 Sleek Horizontal Rows) -->
+            <div class="interactive-quick-bar">
+              <!-- ROW 1: AI Model | Duration | Quality -->
+              <div class="quick-bar-row">
+                <!-- AI Model -->
+                <div class="quick-control-item" style="flex: 1.2; min-width: 140px;">
+                  <label>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.2-6.3-4.6-6.3 4.6 2.3-7.2-6-4.6h7.6z"/></svg>
+                    AI Model
+                  </label>
+                  <select id="quickSelectModel" class="quick-select" style="width: 100%;">
+                    <option value="Omni Flash" selected>⚡ Omni Flash</option>
+                    <option value="Veo 3.1 - Lite">🎥 Veo 3.1 - Lite</option>
+                    <option value="Veo 3.1 - Fast">🎬 Veo 3.1 - Fast</option>
+                    <option value="Veo 3.1 - Quality">🌟 Veo 3.1 - Quality</option>
+                    <option value="Nano Banana 2">🍌 Nano Banana 2</option>
+                    <option value="Imagen 3">🖼️ Imagen 3</option>
+                  </select>
+                </div>
+
+                <!-- Duration Selector Buttons -->
+                <div class="quick-control-item" id="quickDurationContainer" style="flex: 1;">
+                  <label>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    Duration
+                  </label>
+                  <div class="quick-btn-group" id="quickDurationGroup">
+                    <button type="button" class="quick-chip" data-val="4s">4s</button>
+                    <button type="button" class="quick-chip active" data-val="6s">6s</button>
+                    <button type="button" class="quick-chip" data-val="8s">8s</button>
+                    <button type="button" class="quick-chip" data-val="10s">10s</button>
+                  </div>
+                </div>
+
+                <!-- Download Quality Selector -->
+                <div class="quick-control-item" style="flex: 1.2; min-width: 140px;">
+                  <label for="quickSelectQuality">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Download Quality
+                  </label>
+                  <select id="quickSelectQuality" class="quick-select" style="width: 100%;">
+                    <option value="1080p" selected>1080p (Full HD)</option>
+                    <option value="720p">720p (Fast)</option>
+                    <option value="2k">2K (Upscaled)</option>
+                    <option value="4k">4K (Ultra HD)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- ROW 2: Aspect Ratio | Outputs | Download Strategy -->
+              <div class="quick-bar-row">
+                <!-- Aspect Ratio Selector Buttons -->
+                <div class="quick-control-item" style="flex: 1.4;">
+                  <label>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    Aspect Ratio
+                  </label>
+                  <div class="quick-btn-group" id="quickRatioGroup">
+                    <button type="button" class="quick-chip active" data-val="9:16">📱 9:16</button>
+                    <button type="button" class="quick-chip" data-val="16:9">🖥️ 16:9</button>
+                    <button type="button" class="quick-chip" data-val="1:1">⬜ 1:1</button>
+                    <button type="button" class="quick-chip" data-val="4:3">📺 4:3</button>
+                    <button type="button" class="quick-chip" data-val="3:4">📄 3:4</button>
+                  </div>
+                </div>
+
+                <!-- Outputs Count Selector -->
+                <div class="quick-control-item" style="flex: 0.9;">
+                  <label>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                    Outputs
+                  </label>
+                  <div class="quick-btn-group" id="quickOutputsGroup">
+                    <button type="button" class="quick-chip active" data-val="1">x1</button>
+                    <button type="button" class="quick-chip" data-val="2">x2</button>
+                    <button type="button" class="quick-chip" data-val="3">x3</button>
+                    <button type="button" class="quick-chip" data-val="4">x4</button>
+                  </div>
+                </div>
+
+                <!-- Download Strategy -->
+                <div class="quick-control-item" style="flex: 1.1; min-width: 130px;">
+                  <label>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Strategy
+                  </label>
+                  <select id="quickSelectDownloadStrategy" class="quick-select" style="width: 100%;">
+                    <option value="instant" selected>⚡ Instant Live</option>
+                    <option value="batch_end">📦 Batch at End</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- ROW 3: Prompt Interval Delay | File Naming Pattern -->
+              <div class="quick-bar-row">
+                <!-- Prompt Interval Delay -->
+                <div class="quick-control-item" style="flex: 1.3;">
+                  <label>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    Prompt Interval Delay
+                  </label>
+                  <div style="display: flex; gap: 6px; align-items: center;">
+                    <div class="quick-btn-group" id="quickDelayGroup">
+                      <button type="button" class="quick-chip" data-val="0">0s (Fast)</button>
+                      <button type="button" class="quick-chip" data-val="5">5s</button>
+                      <button type="button" class="quick-chip" data-val="10">10s</button>
+                      <button type="button" class="quick-chip" data-val="15">15s</button>
+                      <button type="button" class="quick-chip" data-val="30">30s</button>
+                      <button type="button" class="quick-chip active" data-val="45">45s</button>
+                      <button type="button" class="quick-chip" data-val="50">50s</button>
+                      <button type="button" class="quick-chip" data-val="60">60s</button>
+                      <button type="button" class="quick-chip" data-val="custom">Custom</button>
+                    </div>
+                    <input type="number" id="inputCustomPromptDelay" class="quick-select" value="45" min="0" max="300" style="display: none; width: 55px; text-align: center;" placeholder="sec">
+                  </div>
+                </div>
+
+                <!-- File Naming Pattern -->
+                <div class="quick-control-item" style="flex: 1.4;">
+                  <label>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    File Naming Pattern
+                  </label>
+                  <div style="display: flex; gap: 6px; align-items: center;">
+                    <select id="quickSelectNamingPattern" class="quick-select" style="flex: 1; min-width: 140px;">
+                      <option value="scene" selected>🎬 scene1.mp4 / .png</option>
+                      <option value="numeric">🔢 1.mp4 / 1.png</option>
+                      <option value="clip">🎞️ clip1.mp4 / .png</option>
+                      <option value="shot">🏷️ shot1.mp4 / .png</option>
+                      <option value="video">🎥 video1.mp4 / image1</option>
+                      <option value="custom">✍️ Custom Prefix...</option>
+                      <option value="prompt">📝 Timestamp + Prompt</option>
+                    </select>
+                    <input type="text" id="inputCustomNamingPrefix" class="quick-select" value="scene" placeholder="prefix" style="display: none; width: 70px;">
+                    <span id="namingPreviewBadge" class="badge" style="font-family: monospace; font-size: 10px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; white-space: nowrap;">scene1.mp4</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="action-bar" style="display: flex; gap: 10px; align-items: center;">
+              <button class="btn btn-lg btn-success" id="btnStart" style="flex: 1;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                Start Generation Queue
+              </button>
+              <button class="btn btn-lg btn-secondary" id="btnPause" disabled style="display: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                Pause
+              </button>
+              <button class="btn btn-lg btn-danger" id="btnStop" disabled>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12"></rect></svg>
+                Force Stop
+              </button>
+            </div>
+          </div>
+
+          <!-- Live Progress Monitor -->
+          <div class="panel-card monitor-card">
+            <div class="card-header">
+              <div class="header-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <h3>Queue Progress</h3>
+              </div>
+              <span class="badge" id="progressStepText">0 / 0</span>
+            </div>
+
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div class="progress-fill" id="progressBarFill"></div>
+              </div>
+              <div class="progress-meta">
+                <span>Completion</span>
+                <span id="progressPercentText">0%</span>
+              </div>
+            </div>
+
+            <div class="active-task-box">
+              <div class="task-spinner" id="taskSpinner"></div>
+              <div class="task-info">
+                <h4 id="currentTaskTitle">Queue Idle</h4>
+                <p id="currentTaskDetail">Add prompts and click Start to begin batch generation.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VIEW 2: VIDEO GALLERY -->
+      <section class="view-panel" id="viewGallery">
+        <div class="gallery-header-bar">
+          <div class="gallery-header-info">
+            <h2>Generated Videos</h2>
+            <span class="badge" id="galleryCountBadge">0 Videos</span>
+          </div>
+          <div class="gallery-actions" style="display: flex; gap: 8px; align-items: center;">
+            <!-- Sort Selector -->
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 12px; color: var(--text-muted);">Sort:</span>
+              <select id="selectVideoSort" class="quick-select" style="font-size: 12px; padding: 5px 10px;">
+                <option value="newest" selected>🕒 Newest First</option>
+                <option value="oldest">⏳ Oldest First</option>
+                <option value="sequence">🔢 Sequence Wise (1, 2, 3... / scene1, scene2...)</option>
+              </select>
+            </div>
+
+            <!-- Sync Button -->
+            <button class="btn btn-secondary" id="btnSyncVideoGallery" title="Scan download folder and refresh gallery">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              Sync Folder
+            </button>
+
+            <button class="btn btn-secondary" id="btnOpenDownloadFolder">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+              Open Output Folder
+            </button>
+          </div>
+        </div>
+
+        <div class="video-gallery-grid" id="videoGalleryContainer">
+          <div class="gallery-empty-state" id="galleryEmptyState">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polygon points="23 7 16 12 23 17 23 7"></polygon>
+              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+            </svg>
+            <p>No videos generated in this session yet.</p>
+            <span>Videos will appear here live with instant in-app playback as they render!</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: IMAGE GALLERY & SHOWCASE -->
+      <section class="view-panel" id="viewImageGallery">
+        <div class="gallery-header-bar">
+          <div class="gallery-header-info">
+            <h2>🖼️ Image Gallery & Showcase</h2>
+            <span class="badge" id="imageGalleryCountBadge">0 Images</span>
+          </div>
+          <div class="gallery-actions" style="display: flex; gap: 8px; align-items: center;">
+            <!-- Sort Selector -->
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 12px; color: var(--text-muted);">Sort:</span>
+              <select id="selectImageSort" class="quick-select" style="font-size: 12px; padding: 5px 10px;">
+                <option value="newest" selected>🕒 Newest First</option>
+                <option value="oldest">⏳ Oldest First</option>
+                <option value="sequence">🔢 Sequence Wise (1, 2, 3... / image1, image2...)</option>
+              </select>
+            </div>
+
+            <!-- Sync Button -->
+            <button class="btn btn-secondary" id="btnSyncImageGallery" title="Scan download folder and refresh gallery">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              Sync Folder
+            </button>
+
+            <button class="btn btn-secondary" id="btnOpenImageDownloadFolder">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+              Open Output Folder
+            </button>
+          </div>
+        </div>
+
+        <div class="video-gallery-grid" id="imageGalleryContainer">
+          <div class="gallery-empty-state" id="imageGalleryEmptyState">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <p>No images generated in this session yet.</p>
+            <span>High-Resolution 2K images will appear here with instant full-size lightbox preview!</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: GENERATION HISTORY -->
+      <section class="view-panel" id="viewHistory">
+        <div class="history-header-bar">
+          <div class="history-header-info">
+            <h2>Generation History</h2>
+            <p>Comprehensive record of all batch prompts, accounts, render durations, and export files.</p>
+          </div>
+          <div class="history-header-actions">
+            <!-- View Mode Switcher: Cards vs Table -->
+            <div class="history-view-toggle">
+              <button class="view-toggle-btn active" id="btnHistoryViewCards" title="Cards Grid View">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Cards
+              </button>
+              <button class="view-toggle-btn" id="btnHistoryViewTable" title="List Table View">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                Table
+              </button>
+            </div>
+
+            <input type="text" id="inputSearchHistory" class="form-control" placeholder="Search prompts..." style="width: 170px;">
+            <button class="btn btn-sm btn-secondary" id="btnSyncHistory" title="Scan download folder for all existing MP4 videos">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              Sync
+            </button>
+            <button class="btn btn-sm btn-secondary" id="btnExportHistory" title="Export History as CSV spreadsheet">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Export
+            </button>
+            <button class="btn btn-sm btn-danger" id="btnClearHistory" title="Clear History List">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 🎴 CARDS GRID VIEW (Default) -->
+        <div class="history-cards-grid" id="historyCardsGridContainer">
+          <!-- Injected via JavaScript -->
+        </div>
+
+        <!-- 📄 TABLE VIEW -->
+        <div class="history-table-container" id="historyTableWrapper" style="display: none;">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Prompt & File</th>
+                <th>Account</th>
+                <th>Settings</th>
+                <th>Size / Render</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <!-- Injected via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        <div class="history-empty-state" id="historyEmptyState">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+            <line x1="7" y1="2" x2="7" y2="22"></line>
+            <line x1="17" y1="2" x2="17" y2="22"></line>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+          </svg>
+          <p>No bulk videos generated yet</p>
+          <span>Click "Sync" to discover existing videos, or start a new generation queue!</span>
+        </div>
+      </section>
+
+      <!-- VIEW 4: ACTIVITY LOGS -->
+      <section class="view-panel" id="viewLogs">
+        <div class="logs-header-bar">
+          <div class="logs-header-info">
+            <h2>Execution Terminal Logs</h2>
+            <p>Real-time automation events, Google Veo responses, and download tracking.</p>
+          </div>
+          <button class="btn btn-sm btn-secondary" id="btnClearLogs">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            Clear Logs
+          </button>
+        </div>
+        <div class="terminal-logs-window" id="terminalLogs">
+          <div class="log-entry log-info">[System] Flow Studio Studio ready. Configured for high-speed multi-account video rendering.</div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ⚙️ SETTINGS & ACCOUNTS MODAL (Triggered from bottom-left corner) -->
+  <div class="modal-backdrop" id="settingsModalBackdrop">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <h2>Settings & Accounts Manager</h2>
+        </div>
+        <button class="btn-icon" id="btnCloseSettings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Google Accounts Management -->
+        <div class="settings-section">
+          <div class="section-header">
+            <h4>Google Accounts (Rotation Pool)</h4>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-sm btn-secondary" id="btnRefreshAllCredits" style="gap: 6px;" title="Check real remaining credits on Google Flow for all accounts">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                Sync Real Credits
+              </button>
+              <button class="btn btn-sm btn-primary" id="btnAddAccount">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Add Account
+              </button>
+            </div>
+          </div>
+          <p class="section-hint">Select accounts to include in auto-rotation. Click "Login / Open" on each account to sign in once.</p>
+          <div class="accounts-list" id="accountsListContainer">
+            <!-- Account cards injected here -->
+          </div>
+        </div>
+
+        <!-- Download Destination -->
+        <div class="settings-section">
+          <h4>Master Video Download Folder</h4>
+          <p class="section-hint">Choose where your generated videos and high-res files will automatically be saved on your computer.</p>
+          <div class="input-with-button">
+            <input type="text" id="inputDownloadFolder" class="form-control" readonly placeholder="Select output folder...">
+            <button class="btn btn-secondary" id="btnBrowseFolder">Browse</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="btnSaveSettingsModal">Done / Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🎬 GOOGLE FLOW AUTHENTIC CINEMA PREVIEW MODAL -->
+  <div class="modal-backdrop cinema-modal-backdrop" id="videoPlayerModalBackdrop">
+    <div class="cinema-modal-container">
+      <div class="cinema-header">
+        <div class="cinema-header-left">
+          <span class="cinema-badge">Google Flow Preview</span>
+          <span class="cinema-model-tag" id="cinemaModelTag">⚡ Omni Flash</span>
+          <span class="cinema-ratio-tag" id="cinemaRatioTag">📱 9:16</span>
+        </div>
+        <button class="btn-icon cinema-close-btn" id="btnCloseVideoPlayer" title="Close Preview (Esc)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="cinema-body">
+        <div class="cinema-stage" id="cinemaStage">
+          <video id="modalVideoPlayer" controls autoplay loop playsinline preload="auto"></video>
+        </div>
+      </div>
+
+      <div class="cinema-footer">
+        <div class="cinema-prompt-box" id="playerPromptText" title="Click to copy full prompt"></div>
+        <div class="cinema-actions">
+          <button class="btn btn-secondary btn-cinema" id="btnPlayerCopyPrompt">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy Prompt
+          </button>
+          <button class="btn btn-secondary btn-cinema" id="btnPlayerOpenFolder">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            Open in Folder
+          </button>
+          <button class="btn btn-primary btn-cinema" id="btnPlayerRerun">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            Re-Run in Studio
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🖼️ 2K HIGH-RESOLUTION IMAGE LIGHTBOX MODAL -->
+  <div class="modal-backdrop cinema-modal-backdrop" id="imageLightboxModalBackdrop">
+    <div class="cinema-modal-container" style="max-width: 900px;">
+      <div class="cinema-header">
+        <div class="cinema-header-left">
+          <span class="cinema-badge" style="background: rgba(34, 197, 94, 0.2); color: #4ade80; border-color: rgba(34, 197, 94, 0.3);">🖼️ 2K Image Master Preview</span>
+          <span class="cinema-model-tag" id="imageLightboxModelTag">🍌 Nano Banana Pro</span>
+          <span class="cinema-ratio-tag" id="imageLightboxRatioTag">2K Upscaled</span>
+        </div>
+        <button class="btn-icon cinema-close-btn" id="btnCloseImageLightbox" title="Close Preview (Esc)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="cinema-body" style="min-height: 420px; max-height: 65vh; display: flex; align-items: center; justify-content: center; background: #020617;">
+        <img id="lightboxImage" src="" alt="Full Resolution 2K Image" style="max-width: 100%; max-height: 60vh; border-radius: 8px; object-fit: contain; box-shadow: 0 10px 30px rgba(0,0,0,0.6);">
+      </div>
+
+      <div class="cinema-footer">
+        <div class="cinema-prompt-box" id="lightboxPromptText" title="Click to copy full prompt"></div>
+        <div class="cinema-actions">
+          <button class="btn btn-secondary btn-cinema" id="btnLightboxCopyPrompt">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy Prompt
+          </button>
+          <button class="btn btn-secondary btn-cinema" id="btnLightboxOpenFolder">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            Open in Folder
+          </button>
+          <button class="btn btn-primary btn-cinema" id="btnLightboxRerun">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            Re-Run in Studio
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "google-flow-studio",
+  "version": "1.0.0",
+  "description": "Google Flow Multi-Profile Video Generator & Auto-Downloader Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "google-flow",
+    "veo",
+    "video-automation",
+    "electron"
+  ],
+  "author": "Antigravity",
+  "license": "ISC",
+  "dependencies": {
+    "adm-zip": "^0.6.0",
+    "archiver": "^8.0.0",
+    "puppeteer-core": "^23.0.0"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}
