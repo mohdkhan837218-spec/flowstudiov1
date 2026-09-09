@@ -9,8 +9,8 @@
     "compile:main": "tsc -p tsconfig.main.json",
     "compile:preload": "tsc -p tsconfig.preload.json",
     "compile": "tsc -p tsconfig.main.json && tsc -p tsconfig.preload.json",
-    "start:electron": "electron dist/main/index.js",
-    "app:dev": "npm run compile && concurrently -k \"vite\" \"wait-on tcp:5173 && electron dist/main/index.js\"",
+    "start:electron": "wait-on tcp:5173 && electron dist/main/index.js",
+    "app:dev": "npm run compile && concurrently -k \"npm run dev\" \"npm run start:electron\"",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.main.json --noEmit && tsc -p tsconfig.preload.json --noEmit",
     "test": "vitest run"
   },
