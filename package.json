@@ -1,10 +1,11 @@
 {
   "name": "google-flow-studio",
-  "version": "1.0.0",
-  "description": "Google Flow Multi-Profile Video Generator & Auto-Downloader Desktop App",
+  "version": "2.0.0",
+  "description": "Google Flow Studio V2 - Multi-Profile Desktop Automation & Concurrent Engine",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron main.js",
+    "test": "node test_phase_remediation.js && node test_remediation_suite.js"
   },
   "keywords": [
     "google-flow",
@@ -17,7 +18,8 @@
   "dependencies": {
     "adm-zip": "^0.6.0",
     "archiver": "^8.0.0",
-    "puppeteer-core": "^23.0.0"
+    "puppeteer-core": "^23.0.0",
+    "sql.js": "^1.12.0"
   },
   "devDependencies": {
     "electron": "^31.0.0"

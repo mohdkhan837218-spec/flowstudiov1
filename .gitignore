@@ -1,14 +1,51 @@
+# Dependencies
 node_modules/
+
+# User Chrome Profiles, Sessions & Cookies (CRITICAL: Never commit)
 profiles/
+*.lock
+*.lockfile
+
+# Local Database, Accounts & Private Configs (CRITICAL: Never commit)
 data/
+accounts.json
+accounts.json.tmp*
+
+# Downloads, Videos & Exported Media
+downloads/
 test_downloads/
+*.mp4
+*.mkv
+*.webm
+*.avi
 
-# Local diagnostic output
-*.png
-*.json
-!package.json
-!package-lock.json
+# Local scratch, system & one-off test scripts
+scratch/
+.system_generated/
+.agents/
+legacy_tests/
+capture_*.js
+debug_*.js
+inspect_*.js
+test_*.js
+verify_*.js
+generate_*.js
+organize_*.js
+retry_*.js
+run_*.js
+*.log
+*.tmp
+*.tmp_*
 
+# Local generated images & UI showcases (preserves renderer/ icon and UI assets)
+/*.png
+!/renderer/icon.png
+/*.jpg
+/*.html
+!/renderer/index.html
+!/renderer/*.html
+
+# Environment & Secrets
 .env
 .env.*
 !.env.example

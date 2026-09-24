@@ -1,16 +1,27 @@
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 function getChromeUserDataDir() {
-  const localAppData = process.env.LOCALAPPDATA || path.join(process.env.USERPROFILE || 'C:\\Users\\mohda', 'AppData', 'Local');
+  const localAppData = process.env.LOCALAPPDATA || path.join(os.homedir(), 'AppData', 'Local');
   return path.join(localAppData, 'Google', 'Chrome', 'User Data');
 }
 
 function getChromeExecutablePath() {
+  try {
+    const { dbService } = require('./db');
+    const customPath = dbService.getSetting('chrome_path');
+    if (customPath && fs.existsSync(customPath)) {
+      return customPath;
+    }
+  } catch (e) {}
+
   const possiblePaths = [
     'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
     'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-    path.join(process.env.LOCALAPPDATA || '', 'Google', 'Chrome', 'Application', 'chrome.exe')
+    path.join(process.env.LOCALAPPDATA || path.join(os.homedir(), 'AppData', 'Local'), 'Google', 'Chrome', 'Application', 'chrome.exe'),
+    'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe',
+    'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'
   ];
 
   for (const p of possiblePaths) {
